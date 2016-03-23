@@ -1,10 +1,12 @@
 function disparity = main( ~ )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
 
     leftImage = getImage('../testimages/testL.jpg');
     rightImage = getImage('../testimages/testR.jpg');
     leftImage = imageToGrey(leftImage);
-    imshow(leftImage);
+    rightImage = imageToGrey(rightImage);
+    
+    imageWindow = getImageWindow(1,1,8,8,leftImage);
+    
+    imshow(imageWindow);
     
 end
