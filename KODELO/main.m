@@ -4,7 +4,7 @@ function disparity = main( ~ )
 
     leftImage = getImage('../testimages/testL.jpg');
     rightImage = getImage('../testimages/testR.jpg');
-    leftImage = imageToGray(leftImage);
+    leftImage = imageToGrey(leftImage);
     imshow(leftImage);
     
 end
