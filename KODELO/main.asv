@@ -61,14 +61,15 @@ function disparity = main( ~ )
                         LeftPixelX = leftImageX + x;
                         LeftPixelY = leftImageY + y;
                         
-
+                        DisparityValue = sqrt((LeftPixelX^2 - RightPixelMinSSDX^2) + sqrt((LeftPixelY^2 - RightPixelMinSSDY^2));
                         
-                    
+                        DisparityMap(LeftPixelX , LeftPixelY) = DisparityValue;
+
                      end
                     
                 end
                 
         end
     end
-    imageSSD;
+    DisparityMap;
 end
