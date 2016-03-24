@@ -20,6 +20,7 @@ function disparity = main( ~ )
             leftImageX = (x*8)+1;
             leftImageY = (y*8)+1;
             
+
             leftImageWindow = getImageWindow(leftImageX, leftImageY,imageWindowLength,imageWindowWidth,leftImage);
             
                 for y=0:imageLength-1
@@ -60,7 +61,7 @@ function disparity = main( ~ )
                         LeftPixelX = leftImageX + x;
                         LeftPixelY = leftImageY + y;
                         
-                        DisparityValue = sqrt(LeftPixelX^2 - RightPixelMinSSDX^2) + sqrt(LeftPixelY^2 - RightPixelMinSSDY^2);
+                        DisparityValue = sqrt((LeftPixelX - RightPixelMinSSDX)^2) + sqrt((LeftPixelY - RightPixelMinSSDY)^2);
                         
                         DisparityMap(LeftPixelX , LeftPixelY) = DisparityValue;
 
