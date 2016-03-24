@@ -13,9 +13,15 @@ function disparity = main( ~ )
     
     imageSSD = [];
     
+    disparityMap = [];
+    
     for y=0:imageLength-1
         for x=0:imageWidth-1
-            leftImageWindow = getImageWindow((x*8)+1,(y*8)+1,imageWindowLength,imageWindowWidth,leftImage);
+            leftImageX = (x*8)+1;
+            leftImageY = (y*8)+1;
+            
+            
+            leftImageWindow = getImageWindow(leftImageX, leftImageY,imageWindowLength,imageWindowWidth,leftImage);
             
                 for y=0:imageLength-1
                     for x=0:imageWidth-1
@@ -29,20 +35,39 @@ function disparity = main( ~ )
                 
                 [M , I] = min(reshape(imageSSD, numel(imageSSD) , 1));
                 [minSSDX,minSSDY] = ind2sub(size(imageSSD), I);
+                rightWindowSSDX = ((minSSDX-1)*8)+1;
+                rightWindowSSDY = ((minSSDY-1)*8)+1;
+                rightImageWindow = getImageWindow(rightWindowSSDX,rightWindowSSDY,imageWindowLength,imageWindowWidth,rightImage);
                 
-                rightImageWindow = getImageWindow(((minSSDX-1)*8)+1,((minSSDY-1)*8)+1,imageWindowLength,imageWindowWidth,rightImage);
-                     
-                for y=1:imageLength 
-                     for x = 1:imageWidth
+                pixelSSDArray = [];
+                
+                for y=1:imageWindowLength 
+                     for x = 1:imageWindowWidth
                         leftPixel = leftImageWindow(x,y);
-                        for y=1:imageLength 
-                            for x = 1:imageWidth
-                                
+                        for i=1:imageWindowLength 
+                            for j = 1:imageWindowWidth
+                                rightPixel = rightImageWindow(i,j);
+                                pixelSSD = getSSDPixel(leftPixel, rightPixel); 
+                                pixelSSDArray(i,j) = pixelSSD;
                             end
                         end
-                            
+                       
+                        [minWindowSSD , MinimumSSD] = min(reshape(pixelSSDArray, numel(pixelSSDArray) , 1));
+                        [pixelSSDX,pixelSSDY] = ind2sub(size(pixelSSDArray), MinimumSSD);
+                        
+                        RightPixelMinSSDX = rightWindowSSDX + pixelSSDX;
+                        RightPixelMinSSDY = rightWindowSSDY + pixelSSDY;
+                        
+                        LeftPixelX = leftImageX + x;
+                        LeftPixelY = leftImageY + y;
+                        
+
+                        
+                    
                      end
+                    
                 end
+                
         end
     end
     imageSSD;
