@@ -1,7 +1,7 @@
 function searchArea = getSearchArea( windowInitialCoordX , windowInitialCoordY, maxX,maxY )
 %UNTITLED3 Summary of this function goes here
 %   Coordinates are in window instances NOT PIXELS
-    SearchAreaSizeInWindows = 1;%Hardcoded for now
+    SearchAreaSizeInWindows = 8;%Hardcoded for now
     
     windowStartX = windowInitialCoordX - SearchAreaSizeInWindows;
     windowStartY = windowInitialCoordY - SearchAreaSizeInWindows;
