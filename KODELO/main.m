@@ -62,6 +62,6 @@ function disparity = main( ~ )
     end
     
     imshow(rightImage);
-    imshow(disparityMap);
+    imshow(uint8(disparityMap));
     
 end
