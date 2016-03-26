@@ -14,7 +14,7 @@ function disparity = main( ~ )
     imageSSDArray = [];
     
     disparityMap = [];
-    
+    % y,x are window coordinates
     for y=0:imageLength-1
         for x=0:imageWidth-1
             leftImageX = (x*8)+1;
@@ -22,10 +22,13 @@ function disparity = main( ~ )
             
             leftImageWindow = getImageWindow(leftImageX, leftImageY,imageWindowLength,imageWindowWidth,leftImage);
             
-                imageSSDArray = getImageSSDArray(rightImage, imageLength, imageWidth, leftImageWindow, imageWindowLength, imageWindowWidth);
+                %Argument 2/3 should be changed to window numbers
+                searchArea = getSearchArea(x+1,y+1 ,imageWidth,imageLength );
                 
-                [M , I] = min(reshape(imageSSDArray, numel(imageSSDArray) , 1));
-                [minSSDX,minSSDY] = ind2sub(size(imageSSDArray), I);
+                minimumWindowSSD = getImageSSDArray(rightImage,searchArea, leftImageWindow, imageWindowLength, imageWindowWidth);
+                
+                minSSDX = minimumWindowSSD(1);
+                minSSDY = minimumWindowSSD(2);
                 rightWindowSSDX = ((minSSDX-1)*8)+1;
                 rightWindowSSDY = ((minSSDY-1)*8)+1;
                 rightImageWindow = getImageWindow(rightWindowSSDX,rightWindowSSDY,imageWindowLength,imageWindowWidth,rightImage);
