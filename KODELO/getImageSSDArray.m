@@ -10,7 +10,7 @@ function minimumWindowSSD = getImageSSDArray(rightImage,searchArea,leftImageWind
     for y= startY:endY-1
           for x=startX:endX-1
                         
-             rightImageWindow = getImageWindow((x*8)+1,(y*8)+1,imageWindowLength,imageWindowWidth,rightImage);
+             rightImageWindow = getImageWindow((x*imageWindowWidth)+1,(y*imageWindowLength)+1,imageWindowLength,imageWindowWidth,rightImage);
              SSD = getSSD(leftImageWindow, rightImageWindow); 
 
              if(exist('minimumSSD','var') == 0)

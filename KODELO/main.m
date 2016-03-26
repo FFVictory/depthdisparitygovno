@@ -5,11 +5,11 @@ function disparity = main( ~ )
     leftImage = imageToGrey(leftImage);
     rightImage = imageToGrey(rightImage);
     
-    imageWindowWidth = 8;
-    imageWindowLength = 8;
+    imageWindowWidth = 4;
+    imageWindowLength = 4;
     
-    imageWidth = 320/8;
-    imageLength = 240/8;
+    imageWidth = 320/4;
+    imageLength = 240/4;
     
     imageSSDArray = [];
     
@@ -18,8 +18,8 @@ function disparity = main( ~ )
     for y=0:imageLength-1
         for x=0:imageWidth-1
             
-                leftImageX = (x*8)+1;
-                leftImageY = (y*8)+1;
+                leftImageX = (x*imageWindowWidth)+1;
+                leftImageY = (y*imageWindowLength)+1;
             
                 leftImageWindow = getImageWindow(leftImageX, leftImageY,imageWindowLength,imageWindowWidth,leftImage);
             
@@ -31,8 +31,8 @@ function disparity = main( ~ )
                 minSSDX = minimumWindowSSD(1);
                 minSSDY = minimumWindowSSD(2);
 
-                rightWindowSSDX = ((minSSDX-1)*8)+1;
-                rightWindowSSDY = ((minSSDY-1)*8)+1;
+                rightWindowSSDX = ((minSSDX-1)*imageWindowWidth)+1;
+                rightWindowSSDY = ((minSSDY-1)*imageWindowLength)+1;
                 
                 rightImageWindow = getImageWindow(rightWindowSSDX,rightWindowSSDY,imageWindowLength,imageWindowWidth,rightImage);
                 
