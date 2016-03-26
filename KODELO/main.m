@@ -26,9 +26,8 @@ function disparity = main( ~ )
                 %Argument 2/3 should be changed to window numbers
                 searchArea = getSearchArea(x+1,y+1 ,imageWidth,imageLength );
                 
-                minimumWindowSSD = getImageSSDArray(rightImage,searchArea, leftImageWindow, imageWindowLength, imageWindowWidth);
+                minimumWindowSSD = getImageSSDArray(rightImage, searchArea, leftImageWindow, imageWindowLength, imageWindowWidth);
                 
-
                 minSSDX = minimumWindowSSD(1);
                 minSSDY = minimumWindowSSD(2);
 
@@ -65,7 +64,6 @@ function disparity = main( ~ )
         end
     end
     
-    imshow(rightImage);
-    imshow(uint8(disparityMap));
+     imshow(uint8(disparityMap));
     
 end
