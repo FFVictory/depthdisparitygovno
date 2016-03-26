@@ -15,7 +15,7 @@ function disparity = main( ~ )
     
     disparityMap = [];
     
-    for y=0:imageLength-1x=0:imageWidth-1
+    for y=0:imageLength-1
         for x=0:imageWidth-1
             leftImageX = (x*8)+1;
             leftImageY = (y*8)+1;
@@ -25,7 +25,7 @@ function disparity = main( ~ )
                 imageSSDArray = getImageSSDArray(rightImage, imageLength, imageWidth, leftImageWindow, imageWindowLength, imageWindowWidth);
                 
                 [M , I] = min(reshape(imageSSDArray, numel(imageSSDArray) , 1));
-                [minSSDX,minSSDY] = ind2sub(size(imageSSDArray), I);
+                [minSSDY, minSSDX] = ind2sub(size(imageSSDArray), I);
                 
                 rightWindowSSDX = ((minSSDX-1)*8)+1;
                 rightWindowSSDY = ((minSSDY-1)*8)+1;
@@ -51,7 +51,7 @@ function disparity = main( ~ )
                         
                         DisparityValue = sqrt((LeftPixelX - RightPixelMinSSDX)^2) + sqrt((LeftPixelY - RightPixelMinSSDY)^2);
                         
-                        disparityMap(LeftPixelX , LeftPixelY) = DisparityValue;
+                        disparityMap(LeftPixelY , LeftPixelX) = DisparityValue;
 
                      end
                 end 
